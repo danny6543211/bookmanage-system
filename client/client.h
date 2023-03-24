@@ -9,7 +9,6 @@ class client
 {
 public:
     client();
-    // return value -1(error) 0(correct)
     void client_connect();
     void dosomething();
 

@@ -21,5 +21,5 @@ void client::dosomething()
 {
     char *str = "hello";
     write(server_socket, str, sizeof(str));
-    free(str);
+
 }
