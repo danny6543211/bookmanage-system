@@ -7,9 +7,7 @@
 #include <netinet/in.h>
 #include "server.h"
 
-server::server() {}
-void server::server_init()
-{
+server::server() {
     server_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     struct sockaddr_in server_address;
     memset(&server_address, 0, sizeof(server_address));

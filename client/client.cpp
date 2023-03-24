@@ -6,9 +6,7 @@
 #include <sys/socket.h>
 #include "client.h"
 
-client::client() {}
-void client::client_init()
-{
+client::client() {
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     memset(&server_address, 0, sizeof(server_address));
     server_address.sin_family = AF_INET;
