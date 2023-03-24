@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -21,4 +21,5 @@ void client::dosomething()
 {
     char *str = "hello";
     write(server_socket, str, sizeof(str));
+    free(str);
 }
