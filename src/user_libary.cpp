@@ -10,7 +10,7 @@ bool user_libary::add_user(std::string account, std::string password)
     char *err_msg;
     int res = sqlite3_exec(db, sql_command.c_str(), nullptr, 0, &err_msg);
     if (res != SQLITE_OK) {
-        std::cout << ":" << err_msg << std::endl;
+        std::cout << err_msg << std::endl;
         return 0;
     }
     return 1;
