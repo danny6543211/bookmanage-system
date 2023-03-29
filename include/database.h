@@ -1,5 +1,4 @@
-#ifndef DATA_BASE
-#define DATA_BASE
+#pragma once
 #include <sqlite3.h>
 #include <string>
 // 數據庫表編號
@@ -7,13 +6,11 @@
 #define BOOKS_TABLE 2
 
 
-class data_base 
+class database 
 {
 public: 
-    data_base();
-    ~data_base();
-private:
+    database();
+    ~database();
+protected:
     sqlite3 *db;
 };
-
-#endif
