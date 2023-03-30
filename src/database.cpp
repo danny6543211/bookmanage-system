@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sqlite3.h>
-#include "../include/database.h"
+#include "database.h"
 
 database::database() {
     // 默認數據庫->libary.db
