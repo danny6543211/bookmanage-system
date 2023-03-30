@@ -7,7 +7,8 @@
 #include <netinet/in.h>
 #include "server.h"
 
-server::server() {
+server::server()
+{
     server_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     struct sockaddr_in server_address;
     memset(&server_address, 0, sizeof(server_address));
@@ -28,9 +29,9 @@ void server::server_accept()
 }
 
 void server::server_dosomething()
-{ 
+{
     char buffer[40];
-    read(client_socket, buffer, sizeof(buffer)-1);
-       
+    read(client_socket, buffer, sizeof(buffer) - 1);
+
     printf("%s\n", buffer);
 }

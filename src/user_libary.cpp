@@ -5,10 +5,8 @@
 
 static int callback(void *data, int argc, char **argv, char **col_name)
 {
-    if (argc == 2)
-    {
+    if (argc != 0)
         *(int *)data = 1;
-    }
     else
         *(int *)data = 0;
     return 0;
@@ -49,12 +47,17 @@ bool user_libary::check_user(std::string account, std::string password)
 
 bool user_libary::check_user(std::string account)
 {
-}
-
-int main()
-{
-    user_libary test;
-    // test.add_user("danny", "123123");
-    test.check_user("danny", "123123");
-    return 0;
+    std::string sql_command = "select * from user_table where account == ";
+    sql_command += "'" + account + "';";
+    char *err_msg;
+    int *find = (int *)calloc(1, sizeof(int));
+    int res = sqlite3_exec(db, sql_command.c_str(), callback, find, &err_msg);
+    if (res != SQLITE_OK)
+    {
+        std::cout << err_msg << std::endl;
+        return -1;
+    }
+    res = *find;
+    free(find);
+    return res;
 }
