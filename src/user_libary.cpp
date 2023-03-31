@@ -19,7 +19,7 @@ bool user_libary::add_user(std::string account, std::string password)
     std::string sql_command("insert into user_table values");
     sql_command += "('" + account + "','" + password + "')";
     char *err_msg;
-    int res = sqlite3_exec(db, sql_command.c_str(), nullptr, 0, &err_msg);
+    int res = sqlite3_exec(db, sql_command.c_str(), nullptr, nullptr, &err_msg);
     if (res != SQLITE_OK)
     {
         std::cout << err_msg << std::endl;
