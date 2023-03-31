@@ -2,6 +2,8 @@
 #include "user_table.h"
 #include <string>
 
+//  使用者管理接口
+
 class user_manage
 {
 public:

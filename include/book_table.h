@@ -2,6 +2,8 @@
 #include "database.h"
 #include <string>
 
+// 對數據庫圖書表進行操作
+
 class book_table : public database 
 {
 public:

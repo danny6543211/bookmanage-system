@@ -1,6 +1,8 @@
 #pragma once
 #include <sqlite3.h>
 
+//  打開數據庫
+
 class database
 {
 public:

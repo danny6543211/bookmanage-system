@@ -2,6 +2,8 @@
 #include "database.h"
 #include <string>
 
+// 對數據庫使用者表進行操作
+
 class user_table : public database
 {
 public:
