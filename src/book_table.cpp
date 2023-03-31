@@ -1,4 +1,4 @@
-#include "book_libary.h"
+#include "book_table.h"
 #include <string>
 #include <iostream>
 
@@ -17,9 +17,9 @@ static int book_status_callback(void *data, int argc, char **argv, char **col_na
     return 0;
 }
 
-book_libary::book_libary() {}
+book_table::book_table() {}
 
-int book_libary::add_book(std::string book_name, int book_status)
+int book_table::add_book(std::string book_name, int book_status)
 {
     std::string sql_command("insert into books values");
     sql_command += "('" + book_name + "'," + std::to_string(book_status) + ")";
@@ -36,7 +36,7 @@ int book_libary::add_book(std::string book_name, int book_status)
     return res;
 }
 
-int book_libary::check_book(std::string book_name) 
+int book_table::check_book(std::string book_name) 
 {
     std::string sql_command = "select * from books where bookname == ";
     sql_command += "'" + book_name + "';";
@@ -53,7 +53,7 @@ int book_libary::check_book(std::string book_name)
     return res;
 }
 
-int book_libary::book_status(std::string book_name)
+int book_table::book_status(std::string book_name)
 {
     std::string sql_command = "select status from books where bookname == ";
     sql_command += "'" + book_name + "';";
@@ -70,7 +70,7 @@ int book_libary::book_status(std::string book_name)
     return res;
 }
 
-void book_libary::change_book_status(std::string book_name, int new_status)
+void book_table::change_book_status(std::string book_name, int new_status)
 {
     std::string sql_command = "update books set status = "; 
     sql_command += std::to_string(new_status) + " where bookname = '" + book_name + "';"; 
@@ -85,7 +85,7 @@ void book_libary::change_book_status(std::string book_name, int new_status)
 
 int main()
 {
-    book_libary test;
+    book_table test;
     test.change_book_status("boo", 5);
     return 0;
 }

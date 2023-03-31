@@ -2,10 +2,10 @@
 #include "database.h"
 #include <string>
 
-class book_libary : public database 
+class book_table : public database 
 {
 public:
-    book_libary();
+    book_table();
     // 添加書
     int add_book(std::string book_name, int book_status);
     // 查詢是否有書

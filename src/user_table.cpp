@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <memory>
-#include "user_libary.h"
+#include "user_table.h"
 
 static int callback(void *data, int argc, char **argv, char **col_name)
 {
@@ -12,9 +12,9 @@ static int callback(void *data, int argc, char **argv, char **col_name)
     return 0;
 }
 
-user_libary::user_libary() : database() {}
+user_table::user_table() : database() {}
 
-bool user_libary::add_user(std::string account, std::string password)
+bool user_table::add_user(std::string account, std::string password)
 {
     std::string sql_command("insert into user_table values");
     sql_command += "('" + account + "','" + password + "')";
@@ -28,7 +28,7 @@ bool user_libary::add_user(std::string account, std::string password)
     return 1;
 }
 
-bool user_libary::check_user(std::string account, std::string password)
+bool user_table::check_user(std::string account, std::string password)
 {
     std::string sql_command = "select * from user_table where account == ";
     sql_command += "'" + account + "' and password == '" + password + "';";
@@ -45,7 +45,7 @@ bool user_libary::check_user(std::string account, std::string password)
     return res;
 }
 
-bool user_libary::check_user(std::string account)
+bool user_table::check_user(std::string account)
 {
     std::string sql_command = "select * from user_table where account == ";
     sql_command += "'" + account + "';";

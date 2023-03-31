@@ -4,6 +4,7 @@
 class database
 {
 public:
+    // 打開數據庫
     database();
     ~database();
 
