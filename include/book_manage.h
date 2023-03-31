@@ -14,4 +14,4 @@ class book_manage
 
 private:
     book_table bookTable;
-}
+};
