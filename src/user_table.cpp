@@ -16,7 +16,7 @@ user_table::user_table() : database() {}
 
 bool user_table::add_user(std::string account, std::string password)
 {
-    std::string sql_command("insert into user_table values");
+    std::string sql_command("insert into users values");
     sql_command += "('" + account + "','" + password + "')";
     char *err_msg;
     int res = sqlite3_exec(db, sql_command.c_str(), nullptr, nullptr, &err_msg);
@@ -30,7 +30,7 @@ bool user_table::add_user(std::string account, std::string password)
 
 bool user_table::check_user(std::string account, std::string password)
 {
-    std::string sql_command = "select * from user_table where account == ";
+    std::string sql_command = "select * from users where account == ";
     sql_command += "'" + account + "' and password == '" + password + "';";
     char *err_msg;
     int *find = (int *)calloc(1, sizeof(int));
@@ -47,7 +47,7 @@ bool user_table::check_user(std::string account, std::string password)
 
 bool user_table::check_user(std::string account)
 {
-    std::string sql_command = "select * from user_table where account == ";
+    std::string sql_command = "select * from users where account == ";
     sql_command += "'" + account + "';";
     char *err_msg;
     int *find = (int *)calloc(1, sizeof(int));

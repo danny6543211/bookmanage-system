@@ -81,11 +81,3 @@ void book_table::change_book_status(std::string book_name, int new_status)
         std::cout << err_msg << std::endl;
     }
 }
-
-
-int main()
-{
-    book_table test;
-    test.change_book_status("boo", 5);
-    return 0;
-}
