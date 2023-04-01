@@ -13,5 +13,5 @@ class book_manage
     int return_book(std::string book_name);
 
 private:
-    book_database bookTable;
+    book_database bookDatabase;
 };

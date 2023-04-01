@@ -15,5 +15,5 @@ public:
 
 private:
     // 用於操作user數據表
-    user_database userTable;
+    user_database userDatabase;
 };

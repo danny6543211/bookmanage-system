@@ -91,11 +91,3 @@ void book_database::choice_database()
     if (res)
         std::cout << "can't open database: " << sqlite3_errmsg(db) << std::endl;
 }
-
-int main()
-{
-    book_database test;
-    test.add_book("123", 1);
-
-    return 0;
-}
