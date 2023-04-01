@@ -1,4 +1,4 @@
-#include "book_table.h"
+#include "book_database.h"
 #include <string>
 #include <iostream>
 
@@ -17,9 +17,12 @@ static int book_status_callback(void *data, int argc, char **argv, char **col_na
     return 0;
 }
 
-book_table::book_table() {}
+book_database::book_database() 
+{
+    this->choice_database();
+}
 
-int book_table::add_book(std::string book_name, int book_status)
+int book_database::add_book(std::string book_name, int book_status)
 {
     std::string sql_command("insert into books values");
     sql_command += "('" + book_name + "'," + std::to_string(book_status) + ")";
@@ -36,7 +39,7 @@ int book_table::add_book(std::string book_name, int book_status)
     return res;
 }
 
-int book_table::check_book(std::string book_name) 
+int book_database::check_book(std::string book_name) 
 {
     std::string sql_command = "select * from books where bookname == ";
     sql_command += "'" + book_name + "';";
@@ -53,7 +56,7 @@ int book_table::check_book(std::string book_name)
     return res;
 }
 
-int book_table::book_status(std::string book_name)
+int book_database::book_status(std::string book_name)
 {
     std::string sql_command = "select status from books where bookname == ";
     sql_command += "'" + book_name + "';";
@@ -70,7 +73,7 @@ int book_table::book_status(std::string book_name)
     return res;
 }
 
-void book_table::change_book_status(std::string book_name, int new_status)
+void book_database::change_book_status(std::string book_name, int new_status)
 {
     std::string sql_command = "update books set status = "; 
     sql_command += std::to_string(new_status) + " where bookname = '" + book_name + "';"; 
@@ -80,4 +83,19 @@ void book_table::change_book_status(std::string book_name, int new_status)
     {
         std::cout << err_msg << std::endl;
     }
+}
+
+void book_database::choice_database()
+{
+    int res = sqlite3_open("book_libary.db", &db);
+    if (res)
+        std::cout << "can't open database: " << sqlite3_errmsg(db) << std::endl;
+}
+
+int main()
+{
+    book_database test;
+    test.add_book("123", 1);
+
+    return 0;
 }

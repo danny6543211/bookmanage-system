@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <memory>
-#include "user_table.h"
+#include "user_database.h"
 
 static int callback(void *data, int argc, char **argv, char **col_name)
 {
@@ -12,9 +12,12 @@ static int callback(void *data, int argc, char **argv, char **col_name)
     return 0;
 }
 
-user_table::user_table() : database() {}
+user_database::user_database() : database() 
+{
+    this->choice_database();
+}
 
-bool user_table::add_user(std::string account, std::string password)
+bool user_database::add_user(std::string account, std::string password)
 {
     std::string sql_command("insert into users values");
     sql_command += "('" + account + "','" + password + "')";
@@ -28,7 +31,7 @@ bool user_table::add_user(std::string account, std::string password)
     return 1;
 }
 
-bool user_table::check_user(std::string account, std::string password)
+bool user_database::check_user(std::string account, std::string password)
 {
     std::string sql_command = "select * from users where account == ";
     sql_command += "'" + account + "' and password == '" + password + "';";
@@ -45,7 +48,7 @@ bool user_table::check_user(std::string account, std::string password)
     return res;
 }
 
-bool user_table::check_user(std::string account)
+bool user_database::check_user(std::string account)
 {
     std::string sql_command = "select * from users where account == ";
     sql_command += "'" + account + "';";
@@ -60,4 +63,11 @@ bool user_table::check_user(std::string account)
     res = *find;
     free(find);
     return res;
+}
+
+void user_database::choice_database()
+{
+    int res = sqlite3_open("user_libary.db", &db);
+    if (res)
+        std::cout << "can't open database: " << sqlite3_errmsg(db) << std::endl;
 }

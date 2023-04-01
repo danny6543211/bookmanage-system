@@ -1,5 +1,5 @@
 #pragma once
-#include "user_table.h"
+#include "user_database.h"
 #include <string>
 
 //  使用者管理接口
@@ -15,5 +15,5 @@ public:
 
 private:
     // 用於操作user數據表
-    user_table userTable;
+    user_database userTable;
 };

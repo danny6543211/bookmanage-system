@@ -1,5 +1,5 @@
 #pragma once
-#include "book_table.h"
+#include "book_database.h"
 #include <string>
 
 // 館藏管理接口
@@ -13,5 +13,5 @@ class book_manage
     int return_book(std::string book_name);
 
 private:
-    book_table bookTable;
+    book_database bookTable;
 };

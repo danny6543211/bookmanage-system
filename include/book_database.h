@@ -4,10 +4,10 @@
 
 // 對數據庫圖書表進行操作
 
-class book_table : public database 
+class book_database : public database 
 {
 public:
-    book_table();
+    book_database();
     // 添加書
     int add_book(std::string book_name, int book_status);
     // 查詢是否有書
@@ -16,4 +16,6 @@ public:
     int book_status(std::string book_name);
     // 改變書狀態
     void change_book_status(std::string book_name, int new_status);
+private:
+    void choice_database();
 };
