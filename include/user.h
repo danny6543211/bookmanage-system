@@ -1,10 +1,11 @@
 #ifndef USER_H
 #define USER_H
-#include "database.h"
+#include "user_libary.h"
+#include "book_libary.h"
 #include <string>
 
 //  使用者管理接口
-class user : private user_database, book_database
+class user : private  user_libary, book_libary
 {
 public:
     user();
