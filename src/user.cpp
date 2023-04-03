@@ -1,9 +1,9 @@
 #include "user.h"
 #include <string>
 
-user_manage::user_manage() {}
+user::user() {}
 
-int user_manage::log_in(std::string account, std::string password)
+int user::log_in(std::string account, std::string password)
 {
     if (this->check_user(account))
     {
@@ -15,7 +15,7 @@ int user_manage::log_in(std::string account, std::string password)
     return -1;
 }
 
-int user_manage::sign_up(std::string account, std::string password)
+int user::sign_up(std::string account, std::string password)
 {
     if (this->check_user(account))
         return 0;
@@ -26,7 +26,7 @@ int user_manage::sign_up(std::string account, std::string password)
     }
 }
 
-int user_manage::rent_book(std::string book_name, std::string user_name)
+int user::rent_book(std::string book_name, std::string user_name)
 {
     if (this->book_status(book_name) == 1)
     {
@@ -40,7 +40,7 @@ int user_manage::rent_book(std::string book_name, std::string user_name)
     return -1;
 }
 
-void user_manage::return_book(std::string book_name)
+void user::return_book(std::string book_name)
 {
     this->change_book_status(book_name, 1);
     this->delete_rent_book(book_name);

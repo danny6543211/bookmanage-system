@@ -4,10 +4,10 @@
 #include <string>
 
 //  使用者管理接口
-class user_manage : private user_database, book_database
+class user : private user_database, book_database
 {
 public:
-    user_manage();
+    user();
     // 用戶登陸         return  1:登陸成功 0:密碼錯誤 -1:沒有此帳戶
     int log_in(std::string account, std::string password);
     // 用戶註冊         return  1:註冊成功 0:已有此帳號
