@@ -28,7 +28,7 @@ void server::server_accept()
     client_socket = accept(server_socket, (struct sockaddr *)&clnt_addr, &clnt_addr_size);
 }
 
-void server::server_dosomething()
+void server::dosomething()
 {
     char buffer[40];
     read(client_socket, buffer, sizeof(buffer) - 1);
