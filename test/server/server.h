@@ -1,6 +1,6 @@
 #ifndef SERVER_H
 #define SERVER_H
-#include "user_manage.h"
+#include "user.h"
 
 class server
 {
@@ -13,7 +13,7 @@ public:
 private:
     int server_socket;
     int client_socket;
-    user_manage userManage;
+    user userManage;
 };
 
 #endif

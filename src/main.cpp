@@ -1,8 +1,11 @@
-#include "user_manage.h"
+#include "user.h"
+#include "manager.h"
 #include <iostream>
 
 int main()
 {
-    using std::cout, std::endl;
+    
+    
+
     return 0;
 }
