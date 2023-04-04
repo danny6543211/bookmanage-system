@@ -30,8 +30,9 @@ void server::server_accept()
 
 void server::dosomething()
 {
-    char buffer[40];
-    read(client_socket, buffer, sizeof(buffer) - 1);
 
-    printf("%s\n", buffer);
+    // read(client_socket, message, sizeof(message) - 1);
+
+    // std::cout << message << std::endl
+    
 }

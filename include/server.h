@@ -17,7 +17,7 @@ private:
     int client_socket;
     user user;
     manager manager;
-    message message;
+
 };
 
 #endif

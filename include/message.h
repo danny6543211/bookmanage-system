@@ -1,6 +1,7 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 #include <string>
+#include <iostream>
 
 // action(操作)
 #define LOG_IN          0
@@ -16,8 +17,9 @@
 #define MANAGER         0
 #define USER            1
 
-struct message
+class message
 {
+public:
     int type;
     int action;
     struct
@@ -26,6 +28,8 @@ struct message
         std::string password;
         std::string book_name;
     } data;
+
+    friend std::ostream &operator<<(std::ostream &out, message &obj);
 };
 
 #endif
