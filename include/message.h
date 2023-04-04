@@ -17,9 +17,8 @@
 #define MANAGER         0
 #define USER            1
 
-class message
+struct message
 {
-public:
     int type;
     int action;
     struct
@@ -28,8 +27,6 @@ public:
         std::string password;
         std::string book_name;
     } data;
-
-    friend std::ostream &operator<<(std::ostream &out, message &obj);
 };
 
 #endif
