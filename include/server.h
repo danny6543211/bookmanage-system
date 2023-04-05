@@ -8,16 +8,17 @@ class server
 {
 public:
     server();
+    ~server();
     void server_listen();
     void server_accept();
-    void dosomething();
-
+    void receive_message();
+    void send_value_to_client();
+    void test();
+    int res;
 private:
     int server_socket;
     int client_socket;
-    user user;
-    manager manager;
-
+    message *msg;
 };
 
 #endif
