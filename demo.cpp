@@ -4,7 +4,7 @@
 int main()
 {
     client test;
-    test.set_message(1, LOG_IN, "danny6543211", "da12345", "test book");
+    test.set_message(USER, LOG_IN, "danny6543211", "da12345", "test book");
     
     test.client_connect();
     test.send_message();
