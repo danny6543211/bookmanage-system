@@ -5,8 +5,8 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <memory>
-#include "include/client.h"
-#include "include/message.h"
+#include "../include/client.h"
+#include "../include/message.h"
 
 client::client()
 {

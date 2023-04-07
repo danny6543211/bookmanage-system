@@ -8,8 +8,7 @@ int main()
     
     test.client_connect();
     test.send_message();
-    std::cout << test.get_return_value() << std::endl;
-
+    std::cout << "服务器返回值:" << test.get_return_value() << std::endl;
 
     return 0;
 }
