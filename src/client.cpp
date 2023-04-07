@@ -5,8 +5,8 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <memory>
-#include "client.h"
-#include "message.h"
+#include "include/client.h"
+#include "include/message.h"
 
 client::client()
 {
@@ -52,17 +52,4 @@ int client::get_return_value()
 void client::test()
 {
     
-}
-
-int main()
-{
-    client test;
-    test.set_message(1, LOG_IN, "danny6543211", "da12345", "test book");
-    
-    test.client_connect();
-    test.send_message();
-    std::cout << test.get_return_value() << std::endl;
-
-
-    return 0;
 }

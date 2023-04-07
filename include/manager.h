@@ -1,7 +1,6 @@
 #ifndef MANAGER_H
 #define MANAGER_H
-#include "user_libary.h"
-#include "book_libary.h"
+#include "database.h"
 
 class manager : private user_libary, book_libary
 {

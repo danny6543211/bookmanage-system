@@ -5,7 +5,7 @@ manager::manager() {}
 
 void manager::add_book(std::string book_name)
 {
-    book_libary::add_book(book_name, 1);
+    book_libary::add_book(book_name);
 }
 
 void manager::delete_book(std::string book_name)
