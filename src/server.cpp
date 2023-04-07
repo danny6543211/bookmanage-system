@@ -74,6 +74,7 @@ void server::send_value_to_client()
     int *temp = new int;
     *temp = res;
     write(client_socket, temp, sizeof(int));
+    delete (temp);
 }
 
 void server::test()
