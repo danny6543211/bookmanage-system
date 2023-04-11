@@ -6,20 +6,4 @@
 
 3. 运行服务器 server 和 demo ，服务器显示进行的操作还有数据，客户端显示是否成功
 
-4. 插入测试数据进数据库进行测试 
-
-数据库结构
-databases:  user_libary
-
-table:      user_info       rent_book_table
-
-values:     1.account       1.book_name
-            2.password      2.user_name
-
-图书数据库
-databases:  book_libary
-
-table:      books
-
-values:     1.book_name
-            2.status
+4. 插入测试数据进数据库进行测试
