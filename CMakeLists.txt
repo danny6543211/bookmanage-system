@@ -12,8 +12,8 @@ aux_source_directory(./src DIR_SRCS)
 
 # add the executable
 add_executable(server ${DIR_SRCS})
-add_executable(client demo.cpp client.cpp src/message.cpp)
+add_executable(demo demo.cpp client.cpp src/message.cpp)
 
 
-target_link_libraries(client wsock32 ws2_32)
 target_link_libraries(server wsock32 ws2_32 sqlite3.dll)
+target_link_libraries(demo wsock32 ws2_32)
