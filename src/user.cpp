@@ -43,3 +43,8 @@ void user::return_book(std::string book_name)
     change_book_status(book_name, 1);
     delete_rent_book(book_name);
 }
+
+int user::change_password(std::string account, std::string new_password)
+{
+    return user_libary::change_password(account, new_password);
+}

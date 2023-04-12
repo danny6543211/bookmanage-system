@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <WinSock2.h>
-#include "client.h"
+#include "client_socket.h"
 #pragma comment(lib, "ws2_32.lib")  //加载 ws2_32.dll
 
 
@@ -44,7 +44,6 @@ void client::set_message(int type, int action, char *account, char *password, ch
     strcpy(msg->data.account, account);
     strcpy(msg->data.password, password);
     strcpy(msg->data.book_name, book_name);
-    std::cout << *msg << std::endl;
 }
 
 int client::send_message()

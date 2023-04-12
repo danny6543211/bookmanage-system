@@ -1,11 +1,13 @@
-#include "client.h"
+#include "client_socket.h"
 
 int main()
 {
     client test;
-    test.set_message(USER, LOG_IN, "danny456258", "da123456", "");
     test.client_connect();
+    test.set_message(MANAGER, DELETE_BOOK, "danny456258", "da123456", "testbook");
     test.send_message();
+
+
     std::cout << test.get_return_value() << std::endl;
 
     return 0;

@@ -3,19 +3,21 @@
 #include <string>
 #include <iostream>
 
-#define ACCOUNT_MAX_SIZE 16
+#define ACCOUNT_MAX_SIZE  16
 #define PASSWORD_MAX_SIZE 16
 #define BOOKNAME_MAX_SIZE 16
 
 // action(操作)
 #define LOG_IN          0
 #define SIGN_UP         1
-#define EDIT_USER_INFO  2
-#define RENT_BOOK       3
-#define RETURN_BOOOK    4
+#define RENT_BOOK       2
+#define RETURN_BOOOK    3
+#define CHANGE_PASSWORD 4
 #define ADD_BOOK        5
-#define EDIT_BOOK_INFO  6
-#define MANAGE_USER     7
+#define DELETE_BOOK     6
+
+// #define EDIT_BOOK_INFO  7
+// #define MANAGE_USER     8
 
 // type(用户类型)
 #define MANAGER         0

@@ -15,11 +15,11 @@ public:
     void server_accept();
     void receive_message();
     void send_value_to_client();
+    message *msg;
+    int res; 
 private:
-    int res;
     SOCKET servSock;
     SOCKET clntSock;
-    message *msg;
 };
 
 #endif

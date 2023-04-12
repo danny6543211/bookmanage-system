@@ -30,6 +30,8 @@ protected:
     int add_rent_book(std::string user_name, std::string book_name);
     // 删除借书数据        
     int delete_rent_book(std::string book_name);
+    // 更改密码
+    int change_password(std::string account, std::string new_password);
 };
 
 // 對圖書数据库進行操作
