@@ -11,7 +11,8 @@ int main()
     {
         server.server_accept();
         server.receive_message();
-        if (server.get_type() == 1)
+        int type = server.get_type();
+        if (type == USER)
         {
             user.init(server.get_account(), server.get_password(), server.get_book_name());
             switch (server.get_action())
@@ -37,8 +38,9 @@ int main()
                 std::cout << "error action" << std::endl;
             }
         }
-        else if (server.get_type() == 0)
+        else if (type == MANAGER)
         {
+            manager.init(server.get_account(), server.get_password(), server.get_book_name());
             switch (server.get_action())
             {
             case ADD_BOOK:

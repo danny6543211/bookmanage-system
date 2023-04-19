@@ -44,7 +44,7 @@ void user_libary::add_user(std::string account, std::string password)
         std::cout << err << std::endl;
 }
 
-//  查找帳戶的callback
+//  查找數據的callback
 static int callback(void *data, int argc, char **argv, char **col_name)
 {
     // 有数据返回1
@@ -129,6 +129,24 @@ int user_libary::user_id_count()
     return count;
 }
 
+int user_libary::get_type(std::string account)
+{   
+    char *err;
+    int type;
+    std::string sql_command = "select * from user_info where account == ";
+    sql_command += "'" + account + "';";
+    int res = sqlite3_exec(db, sql_command.c_str(), [](
+        void *data,
+        int argc,
+        char **argv,
+        char **colName
+    )->int{
+        *(int *)data = std::atoi(argv[0]);
+        return 0;
+    }, &type, &err);
+    return type;
+}
+
 
 // 书的数据库操作
 static int book_status_callback(void *data, int argc, char **argv, char **col_name)
@@ -152,18 +170,31 @@ book_libary::book_libary() : database("book_libary.db")
 void book_libary::add_book(std::string book_name)
 {
     // 從編號0開始
+    // std::cout << book_name << std::endl;
     int new_id_count = book_id_count();
     std::string sql_command("insert into books (id, book_name, status) values");
     sql_command += " ('"+ std::to_string(new_id_count) + "', '" + book_name + "', 1);";
-    sqlite3_exec(db, sql_command.c_str(), nullptr, nullptr, nullptr);
+    char *err;
+    int res = sqlite3_exec(db, sql_command.c_str(), nullptr, nullptr, &err);
+    if (res != SQLITE_OK)   
+        std::cout << err << std::endl;
 }
 
 int book_libary::check_book(std::string book_name)
 {
     std::string sql_command = "select * from books where book_name == ";
     sql_command += "'" + book_name + "';";
-    int find;
-    sqlite3_exec(db, sql_command.c_str(), callback, &find, nullptr);
+    char *err;
+    bool find;
+    int res = sqlite3_exec(db, sql_command.c_str(), [](void *data, int argc, char **argv, char **colName)->int{
+        if (argc != 0)
+            *(bool *)data = 1;
+        else
+            *(bool *)data = 0;
+        return 0;
+    }, &find, &err);
+    if (res != SQLITE_OK)
+        std::cout << err << std::endl;
     return find;
 }
 

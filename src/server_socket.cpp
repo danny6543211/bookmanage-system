@@ -66,7 +66,8 @@ void server::set_result(int res)
 
 int server::get_type()
 {
-    return msg->type;
+    user_libary userLibary;
+    return userLibary.get_type(msg->data.account);
 }    
 
 int server::get_action()

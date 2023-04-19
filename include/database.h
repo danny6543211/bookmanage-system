@@ -32,6 +32,8 @@ public:
     void delete_rent_book(std::string book_name);
     // 更改密码
     void change_password(std::string account, std::string new_password);
+    // 查詢使用者權限
+    int get_type(std::string account);
 private:
     // 用於新增id
     int user_id_count();

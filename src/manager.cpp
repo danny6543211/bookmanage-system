@@ -1,5 +1,6 @@
 #include "manager.h"
 #include <string>
+#include <iostream>
 
 manager::manager() {}
 

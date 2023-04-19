@@ -37,18 +37,17 @@ void client::client_connect()
     connect(sock, (SOCKADDR*)&sockAddr, sizeof(SOCKADDR));
 }
 
-void client::set_message(int type, int action, char *account, char *password, char *book_name)
+void client::set_message(int action, char *account, char *password, char *book_name)
 {
-    msg->type = type;
     msg->action = action;
     strcpy(msg->data.account, account);
     strcpy(msg->data.password, password);
     strcpy(msg->data.book_name, book_name);
 }
 
-int client::send_message()
+void client::send_message()
 {
-    send(sock, (char *) msg, sizeof(*msg), 0);
+    send(sock, (char *) msg, sizeof(*msg), 0);    
 }
 
 int client::get_return_value()

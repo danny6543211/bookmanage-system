@@ -12,12 +12,16 @@
 #define SIGN_UP         1
 #define RENT_BOOK       2
 #define RETURN_BOOOK    3
-#define CHANGE_PASSWORD 4
+// #define CHANGE_PASSWORD 4
 #define ADD_BOOK        5
 #define DELETE_BOOK     6
 
-// #define EDIT_BOOK_INFO  7
-// #define MANAGE_USER     8
+#define GET_MY_BOOK     7
+#define GET_ALL_RENT    8
+#define SEARCH_BOOK     9
+
+// #define EDIT_BOOK_INFO  
+// #define MANAGE_USER     
 
 // type(用户类型)
 #define MANAGER         0
@@ -26,7 +30,6 @@
 class message
 {
 public:
-    int type;
     int action;
     struct
     {
