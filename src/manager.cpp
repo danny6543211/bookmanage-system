@@ -3,13 +3,20 @@
 
 manager::manager() {}
 
-void manager::add_book(std::string book_name)
+void manager::init(std::string account, std::string password, std::string book_name)
 {
-    if (!check_book(book_name))
-        book_libary::add_book(book_name);
+    _account = account;
+    _password = password;
+    _book_name = book_name;
 }
 
-void manager::delete_book(std::string book_name)
+void manager::add_book()
 {
-    book_libary::delete_book(book_name);
+    if (!bookLibary.check_book(_book_name))
+        bookLibary.add_book(_book_name);
+}
+
+void manager::delete_book()
+{
+    bookLibary.delete_book(_book_name);
 }

@@ -3,9 +3,9 @@
 #include <string>
 #include <iostream>
 
-#define ACCOUNT_MAX_SIZE  16
-#define PASSWORD_MAX_SIZE 16
-#define BOOKNAME_MAX_SIZE 16
+#define ACCOUNT_MAX_SIZE  20
+#define PASSWORD_MAX_SIZE 20
+#define BOOKNAME_MAX_SIZE 20
 
 // action(操作)
 #define LOG_IN          0

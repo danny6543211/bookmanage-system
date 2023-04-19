@@ -15,9 +15,16 @@ public:
     void server_accept();
     void receive_message();
     void send_value_to_client();
-    message *msg;
-    int res; 
+    void set_result(int res);
+    int get_type();
+    int get_action();
+    std::string get_account();
+    std::string get_password();
+    std::string get_book_name();
+    
 private:
+    message *msg;
+    int _res; 
     SOCKET servSock;
     SOCKET clntSock;
 };

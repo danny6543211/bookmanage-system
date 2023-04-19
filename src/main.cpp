@@ -1,55 +1,61 @@
 #include "server_socket.h"
+#include <string>
 
 int main()
 {
-    server test;
-    test.server_listen();
+    server server;
+    user user;
+    manager manager;
+    server.server_listen();
     while (1)
     {
-        test.server_accept();
-        test.receive_message();
-        if (test.msg->type == 1)
+        server.server_accept();
+        server.receive_message();
+        if (server.get_type() == 1)
         {
-            user user;
-            switch (test.msg->action)
+            user.init(server.get_account(), server.get_password(), server.get_book_name());
+            switch (server.get_action())
             {
             case LOG_IN:
-                test.res = user.log_in(test.msg->data.account, test.msg->data.password);
+                server.set_result(user.log_in());
                 break;
             case SIGN_UP:
-                test.res = user.sign_up(test.msg->data.account, test.msg->data.password);
+                server.set_result(user.sign_up());
                 break;
             case RENT_BOOK:
-                test.res = user.rent_book(test.msg->data.book_name, test.msg->data.account);
+                server.set_result(user.rent_book());
                 break;
             case RETURN_BOOOK:
-                user.return_book(test.msg->data.book_name);
-                test.res = 1;
+                user.return_book();
+                server.set_result(1);
                 break;
-            case CHANGE_PASSWORD:
-                test.res = user.change_password(test.msg->data.account, test.msg->data.password);
-                break;
+            // case CHANGE_PASSWORD:
+            //     server.res = user.change_password();
+            //     break;
             default:
-                test.res = 0;
+                server.set_result(0);
                 std::cout << "error action" << std::endl;
             }
         }
-        else if (test.msg->type == 0)
+        else if (server.get_type() == 0)
         {
-            manager manager;
-            switch (test.msg->action)
+            switch (server.get_action())
             {
             case ADD_BOOK:
-                manager.add_book(test.msg->data.book_name);
-                test.res = 1;
+                manager.add_book();
+                server.set_result(1);
                 break;
             case DELETE_BOOK:
-                manager.delete_book(test.msg->data.book_name);
-                test.res = 1;
+                manager.delete_book();
+                server.set_result(1);
+                break;
+            default:
+                server.set_result(0);
+                std::cout << "error action" << std::endl;
                 break;
             }
         }
-        test.send_value_to_client();
+        server.send_value_to_client();
     }
 
     return 0;

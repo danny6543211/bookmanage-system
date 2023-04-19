@@ -1,50 +1,61 @@
 #include "user.h"
 #include <string>
+#include <iostream>
 
 user::user() {}
 
-int user::log_in(std::string account, std::string password)
+void user::init(std::string account, std::string password, std::string book_name)
 {
-    if (check_user(account))
+    _account = account;
+    _password = password;
+    _book_name = book_name;
+}
+
+int user::log_in()
+{
+    if (userLibary.check_user(_account))
     {
-        return check_user(account, password);
+        return userLibary.check_user(_account, _password);
     }
     // 没有此帐户
     return -1;
 }
 
-int user::sign_up(std::string account, std::string password)
+int user::sign_up()
 {
-    if (check_user(account))
+    if (userLibary.check_user(_account)) 
         return 0;
     else
-        return add_user(account, password);
-
+        userLibary.add_user(_account, _password);
+    return 1;
 }
 
-int user::rent_book(std::string book_name, std::string user_name)
+int user::rent_book()
 {
-    if (check_book(book_name))
+    if (bookLibary.check_book(_book_name))
     {
-        if (book_status(book_name))
+        if (bookLibary.book_status(_book_name))
         {
-            change_book_status(book_name, 0);
-            add_rent_book(user_name, book_name);
+            bookLibary.change_book_status(_book_name, 0);
+            userLibary.add_rent_book(_account, _book_name);
             return 1;
         }
         else
+            // status = 0 書被借走了
             return 0;
     }
+    // 沒這本書
     return -1;
 }
 
-void user::return_book(std::string book_name)
+void user::return_book()
 {
-    change_book_status(book_name, 1);
-    delete_rent_book(book_name);
+    bookLibary.change_book_status(_book_name, 1);
+    userLibary.delete_rent_book(_book_name);
 }
 
-int user::change_password(std::string account, std::string new_password)
-{
-    return user_libary::change_password(account, new_password);
-}
+// int user::change_password(std::string account, std::string new_password)
+// {
+//     user_libary::change_password(account, new_password);
+//     return 1;
+// }

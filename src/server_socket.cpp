@@ -1,5 +1,6 @@
 #include <iostream>
 #include <winsock2.h>
+#include <string>
 #include "server_socket.h"
 #pragma comment (lib, "ws2_32.lib")  //加载 ws2_32.dll
 
@@ -53,7 +54,37 @@ void server::receive_message()
 void server::send_value_to_client()
 {
     int *temp = new int;
-    *temp = res;
+    *temp = _res;
     send(clntSock, (char *)temp, sizeof(int), 0);
     delete (temp);
+}
+
+void server::set_result(int res)
+{
+    _res = res;
+}
+
+int server::get_type()
+{
+    return msg->type;
+}    
+
+int server::get_action()
+{
+    return msg->action;
+}
+
+std::string server::get_account()
+{
+    return std::string(msg->data.account);
+}
+
+std::string server::get_password()
+{
+    return std::string(msg->data.password);
+}
+
+std::string server::get_book_name()
+{  
+    return std::string(msg->data.book_name);
 }

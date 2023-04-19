@@ -18,37 +18,44 @@ protected:
 // 對用户数据库進行操作
 class user_libary : private database
 {
-protected:
+public:
     user_libary();
     // 添加帳戶      
-    int add_user(std::string account, std::string password);
+    void add_user(std::string account, std::string password);
     // 查詢帳號加密码    
     int check_user(std::string account, std::string password);
     // 查詢帳號        
     int check_user(std::string account);
     // 使用者增加借书数据     
-    int add_rent_book(std::string user_name, std::string book_name);
+    void add_rent_book(std::string user_name, std::string book_name);
     // 删除借书数据        
-    int delete_rent_book(std::string book_name);
+    void delete_rent_book(std::string book_name);
     // 更改密码
-    int change_password(std::string account, std::string new_password);
+    void change_password(std::string account, std::string new_password);
+private:
+    // 用於新增id
+    int user_id_count();
+    int get_user_id(std::string account);
+    int get_book_id(std::string book_name);
 };
 
 // 對圖書数据库進行操作
 class book_libary : private database
 {
-protected:
+public:
     book_libary();
     // 添加書           
-    int add_book(std::string book_name);
+    void add_book(std::string book_name);
     // 查詢是否有書  
     int check_book(std::string book_name);
     // 查詢書狀態 返回状态
     int book_status(std::string book_name);
     // 改變書狀態
-    int change_book_status(std::string book_name, int new_status);
+    void change_book_status(std::string book_name, int new_status);
     // 删除书
-    int delete_book(std::string book_name);
+    void delete_book(std::string book_name);
+private:
+    int book_id_count();
 };
 
 #endif
