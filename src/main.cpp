@@ -33,6 +33,9 @@ int main()
             // case CHANGE_PASSWORD:
             //     server.res = user.change_password();
             //     break;
+            case GET_MY_BOOK:
+                server.set_result(user.get_my_book());
+                break;
             default:
                 server.set_result(0);
                 std::cout << "error action" << std::endl;

@@ -59,3 +59,8 @@ void user::return_book()
 //     user_libary::change_password(account, new_password);
 //     return 1;
 // }
+
+int user::get_my_book()
+{
+    
+}

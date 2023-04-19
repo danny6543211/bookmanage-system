@@ -14,12 +14,14 @@ public:
     int log_in();
     //  用戶註冊         1(註冊成功) 0(已有此帳號)
     int sign_up();
-    //  租书           1(成功) 0(已被借走) -1(没这本书)
+    //  租书            1(成功) 0(已被借走) -1(没这本书)
     int rent_book();
     //  还书
     void return_book();
     //  更改密码
     // int change_password(std::string account, std::string new_password);
+    //  查看自己借的書
+    int get_my_book();
     
 private:
     user_libary userLibary;
