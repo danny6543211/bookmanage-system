@@ -6,7 +6,7 @@ int main()
     server server;
     user user;
     manager manager;
-    server.server_listen();
+    
     while (1)
     {
         server.server_accept();

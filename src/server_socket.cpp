@@ -21,6 +21,8 @@ server::server()
 
     msg = new message;
     _result = new result;
+
+    listen(servSock, 20);
 }
 
 server::~server()
@@ -33,11 +35,6 @@ server::~server()
 
     delete(msg);
     delete(_result);
-}
-
-void server::server_listen()
-{
-    listen(servSock, 20);
 }
 
 void server::server_accept()

@@ -9,11 +9,7 @@ std::ostream &operator <<(std::ostream &out, message &msg)
     return out;
 }
 
-
-result::result()
-{
-    
-}
+result::result() {}
 
 void result::set_buffer(char buffer[BUFFER_SIZE])
 {
