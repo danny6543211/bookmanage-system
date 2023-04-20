@@ -14,6 +14,7 @@ client::client()
     sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
     msg = new message;
+    _result = new result;
 }
 
 client::~client()
@@ -24,6 +25,7 @@ client::~client()
     WSACleanup();
 
     delete(msg);
+    delete(_result);
 }
 
 void client::client_connect()
@@ -47,12 +49,16 @@ void client::set_message(int action, char *account, char *password, char *book_n
 
 void client::send_message()
 {
-    send(sock, (char *) msg, sizeof(*msg), 0);    
+    send(sock, (char *) msg, sizeof(*msg), 0);
+    recv(sock, (char *) _result, sizeof(*_result), 0);  
 }
 
 int client::get_return_value()
 {
-    char buffer[32];
-    recv(sock, buffer, sizeof(buffer), 0);
-    return *(int*)buffer;
+    return _result->get_return_value();
+}
+
+char *client::get_return_buffer()
+{
+    return _result->get_return_buffer();
 }

@@ -34,6 +34,9 @@ public:
     void change_password(std::string account, std::string new_password);
     // 查詢使用者權限
     int get_type(std::string account);
+    // 查看借書表
+    char *get_my_rent_book(std::string account);
+    
 private:
     // 用於新增id
     int user_id_count();

@@ -8,3 +8,29 @@ std::ostream &operator <<(std::ostream &out, message &msg)
     out << "book name:" << msg.data.book_name << std::endl;
     return out;
 }
+
+
+result::result()
+{
+    
+}
+
+void result::set_buffer(char buffer[BUFFER_SIZE])
+{
+    strcpy(_buffer, buffer);
+}
+
+void result::set_value(int value)
+{
+    _value = value;
+}
+
+int result::get_return_value()
+{
+    return _value;
+}
+
+char *result::get_return_buffer()
+{
+    return _buffer;
+}

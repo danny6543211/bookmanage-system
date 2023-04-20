@@ -11,6 +11,7 @@ int main()
     {
         server.server_accept();
         server.receive_message();
+        // 查看是管理員還是普通用戶
         int type = server.get_type();
         if (type == USER)
         {
@@ -18,26 +19,27 @@ int main()
             switch (server.get_action())
             {
             case LOG_IN:
-                server.set_result(user.log_in());
+                server.set_return_value(user.log_in());
                 break;
             case SIGN_UP:
-                server.set_result(user.sign_up());
+                server.set_return_value(user.sign_up());
                 break;
             case RENT_BOOK:
-                server.set_result(user.rent_book());
+                server.set_return_value(user.rent_book());
                 break;
             case RETURN_BOOOK:
                 user.return_book();
-                server.set_result(1);
+                server.set_return_value(1);
                 break;
             // case CHANGE_PASSWORD:
-            //     server.res = user.change_password();
+                
             //     break;
             case GET_MY_BOOK:
-                server.set_result(user.get_my_book());
+                server.set_return_value(strlen(server.get_return_buffer()));
+                server.set_return_buffer(user.get_my_book());
                 break;
             default:
-                server.set_result(0);
+                server.set_return_value(0);
                 std::cout << "error action" << std::endl;
             }
         }
@@ -48,19 +50,25 @@ int main()
             {
             case ADD_BOOK:
                 manager.add_book();
-                server.set_result(1);
+                server.set_return_value(1);
                 break;
             case DELETE_BOOK:
                 manager.delete_book();
-                server.set_result(1);
+                server.set_return_value(1);
                 break;
             default:
-                server.set_result(0);
+                server.set_return_value(0);
                 std::cout << "error action" << std::endl;
                 break;
             }
         }
-        server.send_value_to_client();
+        else 
+        {
+            server.set_return_value(-1);
+            server.set_return_buffer("error account");
+        }
+
+        server.send_result();
     }
 
     return 0;

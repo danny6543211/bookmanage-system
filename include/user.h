@@ -21,7 +21,7 @@ public:
     //  更改密码
     // int change_password(std::string account, std::string new_password);
     //  查看自己借的書
-    int get_my_book();
+    char *get_my_book();
     
 private:
     user_libary userLibary;

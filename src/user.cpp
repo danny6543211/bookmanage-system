@@ -1,6 +1,7 @@
 #include "user.h"
 #include <string>
 #include <iostream>
+#include <cstdio>
 
 user::user() {}
 
@@ -17,7 +18,6 @@ int user::log_in()
     {
         return userLibary.check_user(_account, _password);
     }
-    // 没有此帐户
     return -1;
 }
 
@@ -50,8 +50,12 @@ int user::rent_book()
 
 void user::return_book()
 {
-    bookLibary.change_book_status(_book_name, 1);
-    userLibary.delete_rent_book(_book_name);
+    if (bookLibary.check_book(_book_name) && (bookLibary.book_status(_book_name) == 1))
+    {
+        bookLibary.change_book_status(_book_name, 1);
+        userLibary.delete_rent_book(_book_name);
+    }
+    
 }
 
 // int user::change_password(std::string account, std::string new_password)
@@ -60,7 +64,8 @@ void user::return_book()
 //     return 1;
 // }
 
-int user::get_my_book()
+char *user::get_my_book()
 {
     
+    return 0;
 }

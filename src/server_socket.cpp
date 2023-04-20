@@ -20,6 +20,7 @@ server::server()
     bind(servSock, (SOCKADDR*)&sockAddr, sizeof(SOCKADDR));
 
     msg = new message;
+    _result = new result;
 }
 
 server::~server()
@@ -30,7 +31,8 @@ server::~server()
 
     WSACleanup();
 
-    delete msg;
+    delete(msg);
+    delete(_result);
 }
 
 void server::server_listen()
@@ -51,17 +53,14 @@ void server::receive_message()
     std::cout << "receive_message:" << std::endl << *msg;
 }
 
-void server::send_value_to_client()
+void server::send_result()
 {
-    int *temp = new int;
-    *temp = _res;
-    send(clntSock, (char *)temp, sizeof(int), 0);
-    delete (temp);
+    send(clntSock, (char *)_result, sizeof(*_result), 0);
 }
 
-void server::set_result(int res)
+void server::set_return_value(int res)
 {
-    _res = res;
+    _result->set_value(res);
 }
 
 int server::get_type()
@@ -88,4 +87,19 @@ std::string server::get_password()
 std::string server::get_book_name()
 {  
     return std::string(msg->data.book_name);
+}
+
+void server::set_return_buffer(char buffer[BUFFER_SIZE])
+{
+    _result->set_buffer(buffer);
+}
+
+char *server::get_return_buffer()
+{
+    return _result->get_return_buffer();
+}
+
+int server::get_return_value()
+{
+    return _result->get_return_value();
 }

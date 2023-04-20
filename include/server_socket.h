@@ -14,8 +14,11 @@ public:
     void server_listen();
     void server_accept();
     void receive_message();
-    void send_value_to_client();
-    void set_result(int res);
+    void set_return_buffer(char buffer[BUFFER_SIZE]);
+    char *get_return_buffer();
+    void set_return_value(int res);
+    int get_return_value();
+    void send_result();
     int get_type();
     int get_action();
     std::string get_account();
@@ -24,7 +27,7 @@ public:
     
 private:
     message *msg;
-    int _res; 
+    result *_result;
     SOCKET servSock;
     SOCKET clntSock;
 };

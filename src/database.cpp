@@ -44,24 +44,23 @@ void user_libary::add_user(std::string account, std::string password)
         std::cout << err << std::endl;
 }
 
-//  查找數據的callback
-static int callback(void *data, int argc, char **argv, char **col_name)
-{
-    // 有数据返回1
-    if (argc != 0)
-        *(int *)data = 1;
-    else
-        *(int *)data = 0;
-    return 0;
-}
-
 int user_libary::check_user(std::string account, std::string password)
 {
     std::string sql_command = "select * from user_info where account == ";
     sql_command += "'" + account + "' and password == '" + password + "';";
-    int find;
+    int find = 0;
     char *err;
-    int res = sqlite3_exec(db, sql_command.c_str(), callback, &find, &err);
+    int res = sqlite3_exec(db, sql_command.c_str(), [](
+        void *data,
+        int argc,
+        char **argv,
+        char **colName  
+    )->int{
+        // 有数据返回1
+        if (argc != 0)
+            *(int *)data = 1;
+        return 0;
+    }, &find, &err);
     if (res != SQLITE_OK)
         std::cout << err << std::endl;
     return find;
@@ -72,8 +71,19 @@ int user_libary::check_user(std::string account)
     std::string sql_command = "select * from user_info where account == ";
     sql_command += "'" + account + "';";
     char *err;
-    int find;
-    int res = sqlite3_exec(db, sql_command.c_str(), callback, &find, &err);
+    // 如果callback 被調用find改成1
+    int find = 0;
+    int res = sqlite3_exec(db, sql_command.c_str(), [](
+        void *data,
+        int argc,
+        char **argv,
+        char **colName  
+    )->int{
+        // 有数据返回1
+        if (argc != 0)
+            *(int *)data = 1;
+        return 0;
+    }, &find, &err);
     if (res != SQLITE_OK)
         std::cout << err << std::endl;
     return find;
@@ -115,7 +125,7 @@ void user_libary::change_password(std::string account, std::string new_password)
 int user_libary::user_id_count()
 {
     // 查看回調函數執行多少次就是有多少id
-    int count;
+    int count = 0;
     char *err;
     int res = sqlite3_exec(db, "select count(id) from user_info;", [](
         void *data,
@@ -132,27 +142,28 @@ int user_libary::user_id_count()
 int user_libary::get_type(std::string account)
 {   
     char *err;
-    int type;
+    // -1表示沒有此帳戶
+    int type = -1;
     std::string sql_command = "select * from user_info where account == ";
     sql_command += "'" + account + "';";
+
     int res = sqlite3_exec(db, sql_command.c_str(), [](
         void *data,
         int argc,
         char **argv,
-        char **colName
+        char **colName  
     )->int{
-        *(int *)data = std::atoi(argv[0]);
+        *(int *)data = std::stoi(std::string(argv[0]).c_str());
         return 0;
     }, &type, &err);
+    
     return type;
 }
 
 
-// 书的数据库操作
-static int book_status_callback(void *data, int argc, char **argv, char **col_name)
+char *user_libary::get_my_rent_book(std::string account)
 {
-    *(int *)data = std::stoi(argv[0]);
-    return 0;
+    
 }
 
 book_libary::book_libary() : database("book_libary.db") 
@@ -185,7 +196,7 @@ int book_libary::check_book(std::string book_name)
     std::string sql_command = "select * from books where book_name == ";
     sql_command += "'" + book_name + "';";
     char *err;
-    bool find;
+    bool find = 0;
     int res = sqlite3_exec(db, sql_command.c_str(), [](void *data, int argc, char **argv, char **colName)->int{
         if (argc != 0)
             *(bool *)data = 1;
@@ -202,8 +213,11 @@ int book_libary::book_status(std::string book_name)
 {
     std::string sql_command = "select status from books where book_name == ";
     sql_command += "'" + book_name + "';";
-    int status;
-    sqlite3_exec(db, sql_command.c_str(), book_status_callback, &status, nullptr);
+    int status = -1;
+    sqlite3_exec(db, sql_command.c_str(), [](void *data, int argc, char **argv, char **colName)->int {
+        *(int *)data = std::stoi(argv[0]);
+        return 0;
+    }, &status, nullptr);
     return status;
 }
 
@@ -223,7 +237,7 @@ void book_libary::delete_book(std::string book_name)
 
 int book_libary::book_id_count()
 {
-    int count;
+    int count = 0;
     sqlite3_exec(db, "select count(id) from books;", [](
         void *data,
         int colCount,

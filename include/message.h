@@ -2,10 +2,12 @@
 #define MESSAGE_H
 #include <string>
 #include <iostream>
+#include <cstring>
 
 #define ACCOUNT_MAX_SIZE  20
 #define PASSWORD_MAX_SIZE 20
 #define BOOKNAME_MAX_SIZE 20
+#define BUFFER_SIZE       100
 
 // action(操作)
 #define LOG_IN          0
@@ -39,5 +41,20 @@ public:
     } data;
     friend std::ostream &operator <<(std::ostream &out, message &msg);
 };
+
+class result
+{
+public:
+    result();
+    void set_buffer(char buffer[BUFFER_SIZE]);
+    void set_value(int value);
+    int get_return_value();
+    char *get_return_buffer();
+    
+private:
+    int _value;
+    char _buffer[BUFFER_SIZE];
+};
+
 
 #endif
