@@ -8,31 +8,27 @@ int main()
 {
     client test;
     
+    // 管理员账号
     char manager_account[ACCOUNT_MAX_SIZE] = "danny456258";
     char manager_password[PASSWORD_MAX_SIZE] = "da123456";
     
+    // 正常账号
     char user_account[20] = "test_account";
     char user_password[20] = "test_password";
     
+    // 测试书名
     char book1[20] = "test_book1";
     char book2[20] = "test_book2";
+    
+    // 透过test字段搜索
     char book3[20] = "test";
-    // test.send_message(DELETE_BOOK, manager_account, manager_password, book1);
-    // test.send_message(DELETE_BOOK, manager_account, manager_password, book2);
 
-    // test.send_message(ADD_BOOK, manager_account, manager_password, book1);
-    // test.send_message(ADD_BOOK, manager_account, manager_password, book2);
-
-    // test.send_message(RENT_BOOK, user_account, user_password, book1);
-    // test.send_message(RENT_BOOK, user_account, user_password, book2);
-    test.send_message(SEARCH_BOOK, user_account, user_password, book3);
-    std::cout << test.get_return_buffer() << std::endl;
-    std::cout << test.get_return_value() << std::endl;
-
-    // user_libary user;
-    // printf("%s", user.get_my_rent_book(std::string(user_account)));
-    // std::cout << user.get_my_rent_book(std::string(user_account)) << std::endl;
-
+    // 查看借的书
+    test.send_message(GET_MY_BOOK, user_account, user_password, "");
+    // 返回值
+    std::cout << "value:" << test.get_return_value() << std::endl;
+    // 返回的字符串
+    std::cout << "buffer:" << std::endl << test.get_return_buffer() << std::endl;
 
     return 0;
 }
