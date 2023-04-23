@@ -69,7 +69,8 @@ std::string user::get_my_book()
     return userLibary.get_my_rent_book(_account);
 }
 
-void user::refresh_buffer()
+
+std::string user::search_book(std::string keyword)
 {
-    
+    return bookLibary.search_book(keyword);
 }

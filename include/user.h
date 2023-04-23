@@ -22,12 +22,13 @@ public:
     // int change_password(std::string account, std::string new_password);
     //  查看自己借的書
     std::string get_my_book();
-    // 刷新buffer
-    void refresh_buffer();
+    // 查书
+    std::string search_book(std::string keyword);
     
 private:
     user_libary userLibary;
     book_libary bookLibary;
+
     std::string _account;
     std::string _password;
     std::string _book_name;

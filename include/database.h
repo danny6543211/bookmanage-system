@@ -60,6 +60,8 @@ public:
     void change_book_status(std::string book_name, int new_status);
     // 删除书
     void delete_book(std::string book_name);
+    // 透过字段查询有啥书
+    std::string search_book(std::string keyword);
 private:
     int book_id_count();
 };

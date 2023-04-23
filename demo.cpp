@@ -16,7 +16,7 @@ int main()
     
     char book1[20] = "test_book1";
     char book2[20] = "test_book2";
-
+    char book3[20] = "test";
     // test.send_message(DELETE_BOOK, manager_account, manager_password, book1);
     // test.send_message(DELETE_BOOK, manager_account, manager_password, book2);
 
@@ -25,7 +25,7 @@ int main()
 
     // test.send_message(RENT_BOOK, user_account, user_password, book1);
     // test.send_message(RENT_BOOK, user_account, user_password, book2);
-    test.send_message(GET_MY_BOOK, user_account, user_password, book2);
+    test.send_message(SEARCH_BOOK, user_account, user_password, book3);
     std::cout << test.get_return_buffer() << std::endl;
     std::cout << test.get_return_value() << std::endl;
 

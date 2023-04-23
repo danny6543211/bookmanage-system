@@ -40,6 +40,10 @@ int main()
                 server.set_return_buffer(user.get_my_book());
                 server.set_return_value(1);
                 break;
+            case SEARCH_BOOK:
+                server.set_return_buffer(user.search_book(server.get_book_name()));
+                server.set_return_value(1);
+                break;
             default:
                 server.set_return_value(0);
                 std::cout << "error action" << std::endl;

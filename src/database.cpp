@@ -265,3 +265,17 @@ int book_libary::book_id_count()
         &count, nullptr);
     return count;
 }
+
+std::string book_libary::search_book(std::string keyword){
+    std::string sql = "select * from books where book_name like '%";
+    sql += keyword + "%';";
+    char buffer[BUFFER_SIZE] = "";
+    sqlite3_exec(db, sql.c_str(), [](void *data, int colCount, char **colValue, char **colName) -> int
+    {
+        strcat((char *)data, colValue[1]);
+        strcat((char *)data, " ");
+    return 0; },
+    buffer, nullptr);
+    buffer[strlen(buffer)-1] = '\0';
+    return std::string(buffer);
+}
