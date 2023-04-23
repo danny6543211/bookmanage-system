@@ -64,8 +64,12 @@ void user::return_book()
 //     return 1;
 // }
 
-char *user::get_my_book()
+std::string user::get_my_book()
+{
+    return userLibary.get_my_rent_book(_account);
+}
+
+void user::refresh_buffer()
 {
     
-    return 0;
 }

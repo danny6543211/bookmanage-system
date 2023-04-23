@@ -9,11 +9,30 @@ std::ostream &operator <<(std::ostream &out, message &msg)
     return out;
 }
 
-result::result() {}
-
-void result::set_buffer(char buffer[BUFFER_SIZE])
+void message::empty_message()
 {
-    strcpy(_buffer, buffer);
+    action = 0;
+    strcpy(data.account, "");
+    strcpy(data.password, "");
+    strcpy(data.book_name, "");
+}
+
+
+
+
+
+
+
+
+
+result::result() 
+{
+    _value = -1;
+}
+
+void result::set_buffer(std::string buffer)
+{
+    strcpy(_buffer, buffer.c_str());
 }
 
 void result::set_value(int value)
@@ -26,7 +45,7 @@ int result::get_return_value()
     return _value;
 }
 
-char *result::get_return_buffer()
+std::string result::get_return_buffer()
 {
-    return _buffer;
+    return std::string(_buffer);
 }

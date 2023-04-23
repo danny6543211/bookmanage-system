@@ -7,7 +7,7 @@
 #define ACCOUNT_MAX_SIZE  20
 #define PASSWORD_MAX_SIZE 20
 #define BOOKNAME_MAX_SIZE 20
-#define BUFFER_SIZE       100
+#define BUFFER_SIZE       200
 
 // action(操作)
 #define LOG_IN          0
@@ -17,8 +17,8 @@
 // #define CHANGE_PASSWORD 4
 #define ADD_BOOK        5
 #define DELETE_BOOK     6
-
 #define GET_MY_BOOK     7
+
 #define GET_ALL_RENT    8
 #define SEARCH_BOOK     9
 
@@ -39,17 +39,19 @@ public:
         char password[PASSWORD_MAX_SIZE];
         char book_name[BOOKNAME_MAX_SIZE];
     } data;
+public:
     friend std::ostream &operator <<(std::ostream &out, message &msg);
+    void empty_message();
 };
 
 class result
 {
 public:
     result();
-    void set_buffer(char buffer[BUFFER_SIZE]);
+    void set_buffer(std::string buffer);
     void set_value(int value);
     int get_return_value();
-    char *get_return_buffer();
+    std::string get_return_buffer();
     
 private:
     int _value;

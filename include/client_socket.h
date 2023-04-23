@@ -14,7 +14,7 @@ public:
     // 取得服务器回传的值
     int get_return_value();
     // 取得服務器回傳的數據
-    char *get_return_buffer();
+    std::string get_return_buffer();
 
 private:
     message *msg;

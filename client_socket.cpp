@@ -53,7 +53,7 @@ int client::get_return_value()
     return _result->get_return_value();
 }
 
-char *client::get_return_buffer()
+std::string client::get_return_buffer()
 {
     return _result->get_return_buffer();
 }

@@ -1,6 +1,7 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 #include "sqlite3.h"
+#include "message.h"
 #include <string>
 
 //  數據庫
@@ -35,7 +36,7 @@ public:
     // 查詢使用者權限
     int get_type(std::string account);
     // 查看借書表
-    char *get_my_rent_book(std::string account);
+    std::string get_my_rent_book(std::string account);
     
 private:
     // 用於新增id

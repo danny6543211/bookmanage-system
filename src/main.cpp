@@ -3,9 +3,11 @@
 
 int main()
 {
-    server server;
+
+
     user user;
     manager manager;
+    server server;
     
     while (1)
     {
@@ -35,8 +37,8 @@ int main()
                 
             //     break;
             case GET_MY_BOOK:
-                server.set_return_value(strlen(server.get_return_buffer()));
                 server.set_return_buffer(user.get_my_book());
+                server.set_return_value(1);
                 break;
             default:
                 server.set_return_value(0);
@@ -64,11 +66,12 @@ int main()
         }
         else 
         {
-            server.set_return_value(-1);
+            server.set_return_value(0);
             server.set_return_buffer("error account");
         }
-
+        std::cout << "return value:" << server.get_return_value() << std::endl;
         server.send_result();
+        server.server_close();
     }
 
     return 0;

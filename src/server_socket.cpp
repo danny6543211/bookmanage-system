@@ -27,11 +27,10 @@ server::server()
 
 server::~server()
 {
-
+    WSACleanup();
     closesocket(clntSock);
     closesocket(servSock);
 
-    WSACleanup();
 
     delete(msg);
     delete(_result);
@@ -39,6 +38,7 @@ server::~server()
 
 void server::server_accept()
 {
+    std::cout << "accept" << std::endl;
     SOCKADDR clntAddr;
     int nSize = sizeof(SOCKADDR);
     clntSock = accept(servSock, (SOCKADDR*)&clntAddr, &nSize);
@@ -48,6 +48,12 @@ void server::receive_message()
 {
     recv(clntSock, (char *)msg, sizeof(*msg), 0);
     std::cout << "receive_message:" << std::endl << *msg;
+}
+
+void server::server_close()
+{   
+    msg->empty_message();
+    _result->set_buffer("");
 }
 
 void server::send_result()
@@ -63,7 +69,7 @@ void server::set_return_value(int res)
 int server::get_type()
 {
     user_libary userLibary;
-    return userLibary.get_type(msg->data.account);
+    return userLibary.get_type(std::string(msg->data.account));
 }    
 
 int server::get_action()
@@ -86,12 +92,12 @@ std::string server::get_book_name()
     return std::string(msg->data.book_name);
 }
 
-void server::set_return_buffer(char buffer[BUFFER_SIZE])
+void server::set_return_buffer(std::string buffer)
 {
     _result->set_buffer(buffer);
 }
 
-char *server::get_return_buffer()
+std::string server::get_return_buffer()
 {
     return _result->get_return_buffer();
 }

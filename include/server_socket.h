@@ -15,10 +15,12 @@ public:
     void server_accept();
     // 接收客戶端消息
     void receive_message();
+    // 关闭连接
+    void server_close();
     // 設定返回字符串
-    void set_return_buffer(char buffer[BUFFER_SIZE]);
+    void set_return_buffer(std::string buffer);
     // 返回字符串
-    char *get_return_buffer();
+    std::string get_return_buffer();
     // 設定返回值
     void set_return_value(int res);
     // 獲取返回值
