@@ -4,10 +4,10 @@
 #include <iostream>
 #include <cstring>
 
-#define ACCOUNT_MAX_SIZE  20
-#define PASSWORD_MAX_SIZE 20
+#define ACCOUNT_MAX_SIZE  15
+#define PASSWORD_MAX_SIZE 15
 #define BOOKNAME_MAX_SIZE 20
-#define BUFFER_SIZE       200
+#define BUFFER_SIZE       512
 
 // action(操作)
 #define LOG_IN          0

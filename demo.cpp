@@ -24,7 +24,7 @@ int main()
     char book3[20] = "test";
 
     // 查看借的书
-    test.send_message(GET_MY_BOOK, user_account, user_password, "");
+    test.send_message(GET_MY_BOOK, user_account, user_password, book3);
     // 返回值
     std::cout << "value:" << test.get_return_value() << std::endl;
     // 返回的字符串
