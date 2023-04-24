@@ -3,11 +3,9 @@
 
 int main()
 {
-
-
+    server server;
     user user;
     manager manager;
-    server server;
     
     while (1)
     {
@@ -30,12 +28,8 @@ int main()
                 server.set_return_value(user.rent_book());
                 break;
             case RETURN_BOOOK:
-                user.return_book();
-                server.set_return_value(1);
+                server.set_return_value(user.return_book());
                 break;
-            // case CHANGE_PASSWORD:
-                
-            //     break;
             case GET_MY_BOOK:
                 server.set_return_buffer(user.get_my_book());
                 server.set_return_value(1);
@@ -55,12 +49,10 @@ int main()
             switch (server.get_action())
             {
             case ADD_BOOK:
-                manager.add_book();
-                server.set_return_value(1);
+                server.set_return_value(manager.add_book());
                 break;
             case DELETE_BOOK:
-                manager.delete_book();
-                server.set_return_value(1);
+                server.set_return_value(manager.delete_book());
                 break;
             default:
                 server.set_return_value(0);

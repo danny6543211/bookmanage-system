@@ -34,13 +34,14 @@ int user::rent_book()
 {
     if (bookLibary.check_book(_book_name))
     {
-        if (bookLibary.book_status(_book_name))
+        // 有书
+        if (bookLibary.book_status(_book_name) == 1)
         {
             bookLibary.change_book_status(_book_name, 0);
             userLibary.add_rent_book(_account, _book_name);
             return 1;
         }
-        else
+        else 
             // status = 0 書被借走了
             return 0;
     }
@@ -48,14 +49,16 @@ int user::rent_book()
     return -1;
 }
 
-void user::return_book()
+int user::return_book()
 {
-    if (bookLibary.check_book(_book_name) && (bookLibary.book_status(_book_name) == 1))
+    if (bookLibary.check_book(_book_name) && (bookLibary.book_status(_book_name) == 0))
     {
         bookLibary.change_book_status(_book_name, 1);
         userLibary.delete_rent_book(_book_name);
+        return 1;
     }
-    
+    // 没这本书
+    return 0;
 }
 
 // int user::change_password(std::string account, std::string new_password)

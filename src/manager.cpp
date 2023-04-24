@@ -11,13 +11,18 @@ void manager::init(std::string account, std::string password, std::string book_n
     _book_name = book_name;
 }
 
-void manager::add_book()
+int manager::add_book()
 {
     if (!bookLibary.check_book(_book_name))
+    {
         bookLibary.add_book(_book_name);
+        return 1;
+    }
+    return 0;
 }
 
-void manager::delete_book()
+int manager::delete_book()
 {
     bookLibary.delete_book(_book_name);
+    return 1;
 }

@@ -9,9 +9,9 @@ public:
     // 初始化
     void init(std::string account, std::string password, std::string book_name);
     // 增加书
-    void add_book();
+    int add_book();
     // 删除书
-    void delete_book();
+    int delete_book();
 
 private:
     user_libary userLibary;

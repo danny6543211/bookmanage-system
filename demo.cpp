@@ -3,11 +3,10 @@
 #include <string>
 #include <cstring>
 #include <cstdlib> 
+#include <windows.h>
 
 int main()
 {
-    client test;
-    
     // 管理员账号
     char manager_account[ACCOUNT_MAX_SIZE] = "danny456258";
     char manager_password[PASSWORD_MAX_SIZE] = "da123456";
@@ -21,14 +20,18 @@ int main()
     char book2[20] = "test_book2";
     
     // 透过test字段搜索
-    char book3[20] = "test";
+    char book3[20] = "book2";
 
+
+    client test;
     // 查看借的书
-    test.send_message(GET_MY_BOOK, user_account, user_password, book3);
+    test.send_message(SEARCH_BOOK, user_account, user_password, book3);
     // 返回值
     std::cout << "value:" << test.get_return_value() << std::endl;
     // 返回的字符串
     std::cout << "buffer:" << std::endl << test.get_return_buffer() << std::endl;
+
+    system("pause");
 
     return 0;
 }

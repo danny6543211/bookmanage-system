@@ -17,14 +17,6 @@ void message::empty_message()
     strcpy(data.book_name, "");
 }
 
-
-
-
-
-
-
-
-
 result::result() 
 {
     _value = -1;

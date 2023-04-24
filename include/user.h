@@ -17,7 +17,7 @@ public:
     //  租书            1(成功) 0(已被借走) -1(没这本书)
     int rent_book();
     //  还书
-    void return_book();
+    int return_book();
     //  更改密码
     // int change_password(std::string account, std::string new_password);
     //  查看自己借的書
