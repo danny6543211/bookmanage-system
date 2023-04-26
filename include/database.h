@@ -12,7 +12,7 @@ protected:
     // 关闭数据库
     ~database();
 
-protected:
+private:
     sqlite3 *db;
 };
 

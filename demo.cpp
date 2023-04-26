@@ -25,7 +25,7 @@ int main()
 
     client test;
     // 查看借的书
-    test.send_message(SEARCH_BOOK, user_account, user_password, book3);
+    test.send_message(SEARCH_BOOK, user_account, user_password, "test");
     // 返回值
     std::cout << "value:" << test.get_return_value() << std::endl;
     // 返回的字符串
