@@ -11,6 +11,15 @@ void manager::init(std::string account, std::string password, std::string book_n
     _book_name = book_name;
 }
 
+int manager::log_in()
+{
+    if (userLibary.check_user(_account))
+    {
+        return userLibary.check_user(_account, _password);
+    }
+    return -1;
+}
+
 int manager::add_book()
 {
     if (!bookLibary.check_book(_book_name))

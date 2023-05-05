@@ -1,4 +1,4 @@
-#include "server_socket.h"
+#include "server.h"
 #include <string>
 
 int main()
@@ -48,6 +48,10 @@ int main()
             manager.init(server.get_account(), server.get_password(), server.get_book_name());
             switch (server.get_action())
             {
+            case LOG_IN:
+                user.init(server.get_account(), server.get_password(), server.get_book_name());
+                server.set_return_value(user.log_in());
+                break;
             case ADD_BOOK:
                 server.set_return_value(manager.add_book());
                 break;
@@ -62,8 +66,8 @@ int main()
         }
         else 
         {
-            server.set_return_value(0);
-            server.set_return_buffer("error account");
+            server.set_return_value(-1);
+            server.set_return_buffer("account not exist");
         }
         std::cout << "return value:" << server.get_return_value() << std::endl;
         server.send_result();
