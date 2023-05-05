@@ -1,8 +1,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
-#include "sqlite3.h"
-#include "message.h"
+#include <sqlite3.h>
 #include <string>
+#include "message.h"
 
 //  數據庫
 class database

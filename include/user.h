@@ -1,7 +1,7 @@
 #ifndef USER_H
 #define USER_H
-#include "database.h"
 #include <string>
+#include "database.h"
 
 //  使用者管理接口
 class user
