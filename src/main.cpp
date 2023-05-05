@@ -74,6 +74,7 @@ int main()
             switch (server.get_action())
             {
             case LOG_IN:
+                user.init(server.get_account(), server.get_password(), server.get_book_name());
                 return_value = user.log_in();
                 server.set_return_value(return_value);
                 if (return_value == 0)
@@ -92,6 +93,11 @@ int main()
             case DELETE_BOOK:
                 server.set_return_value(manager.delete_book());
                 server.set_return_buffer("delete book successful");
+                break;
+            case SEARCH_BOOK:
+                user.init(server.get_account(), server.get_password(), server.get_book_name());
+                server.set_return_buffer(user.search_book(server.get_book_name()));
+                server.set_return_value(1);
                 break;
             default:
                 server.set_return_value(0);

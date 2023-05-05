@@ -25,7 +25,7 @@ int main()
 
     client test;
     // 登陆
-    test.send_message(LOG_IN, "test_account", "123", "test");
+    test.send_message(SEARCH_BOOK, "test_account", "test_password", "book");
     // 返回值
     std::cout << "value:" << test.get_return_value() << std::endl;
     // 返回的字符串
