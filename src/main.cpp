@@ -31,7 +31,7 @@ int main()
                 if (return_value == 0)
                     server.set_return_buffer("password error");
                 else if (return_value == 1)
-                    server.set_return_buffer("login successful");
+                    server.set_return_buffer("user");
                 break;
             case SIGN_UP:
                 return_value = user.sign_up();
@@ -80,7 +80,7 @@ int main()
                 if (return_value == 0)
                     server.set_return_buffer("password error");
                 else if (return_value == 1)
-                    server.set_return_buffer("login successful");
+                    server.set_return_buffer("manager");
                 break;
             case ADD_BOOK:
                 return_value = manager.add_book();

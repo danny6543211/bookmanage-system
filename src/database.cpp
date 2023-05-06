@@ -88,10 +88,14 @@ void user_libary::add_rent_book(std::string account, std::string book_name)
     // 獲取當前日期時間
     auto now = std::chrono::system_clock::now();
     time_t time = std::chrono::system_clock::to_time_t(now);
-    char *temp = ctime(&time);
-    temp[strlen(temp) - 1] = '|';
-    std::string sql_command = "insert into rent_book_table (account, book_name, date) values";
-    sql_command += " ('" + account + "','" + book_name + "', '" + std::string(temp) + "');";
+    // 借书日期为三个月
+    time_t return_date = time + 2592000;
+    std::string c_date = ctime(&time);
+    std::string r_date = ctime(&return_date);
+    *(c_date.rbegin()) = ' ';
+    *(r_date.rbegin()) = ' ';
+    std::string sql_command = "insert into rent_book_table (account, book_name, date, return_date) values";
+    sql_command += " ('" + account + "','" + book_name + "', '" + c_date + "','" + r_date +"');";
     char *err_msg;
     int res = sqlite3_exec(db, sql_command.c_str(), nullptr, nullptr, &err_msg);
     if (res != SQLITE_OK)
@@ -162,15 +166,22 @@ std::string user_libary::get_my_rent_book(std::string account)
     int res = sqlite3_exec(
         db, sql_command.c_str(), [](void *data, int argc, char **argv, char **colName) -> int
         {
-        strcat((char *)data, argv[0]);
-        strcat((char *)data, " ");
+        // 账号
+        // strcat((char *)data, argv[0]);
+        // strcat((char *)data, " ");
+        // 书名
         strcat((char *)data, argv[1]);
-        strcat((char *)data, " ");
+        strcat((char *)data, "\n");
+        // 借书日期
         strcat((char *)data, argv[2]);
         strcat((char *)data, "\n");
+        
+        strcat((char *)data, argv[3]);
+        strcat((char *)data, "\n");
+
         return 0; },
         buffer, &err_msg);
-    buffer[strlen(buffer) - 1] = '\0';
+    buffer[strlen(buffer)] = '\0';
     if (res != SQLITE_OK)
         std::cout << err_msg << std::endl;
     return std::string(buffer);
