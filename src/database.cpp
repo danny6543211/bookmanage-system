@@ -311,6 +311,9 @@ std::string book_libary::search_book(std::string keyword){
 
         strcat((char *)data, colValue[2]);
         strcat((char *)data, "\n");
+
+        strcat((char *)data, colValue[3]);
+        strcat((char *)data, "\n");
     return 0; },
     buffer, &err_msg);
     buffer[strlen(buffer)] = '\0';
