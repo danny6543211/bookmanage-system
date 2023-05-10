@@ -17,7 +17,7 @@ std::vector<std::string> foo(std::string str)
     {
         if (*it_r == '\n')
         {
-            res.push_back(std::string(it_l, (it_r-1)));
+            res.push_back(std::string(it_l, (it_r)));
             it_l = it_r+1;
         }
         it_r++;
@@ -39,17 +39,20 @@ int main()
     char book2[20] = "test_book2";
 
     client test;
-    // // 登陆
-    test.send_message(GET_MY_BOOK, "test_account", "test_password", "test_book1");
+ 
+
+    test.send_message(SEARCH_BOOK, "danny456258", "da123456", "test");
+    
     
     // foo 把 string 分段成 vector<string> 
 
-    std::vector<std::string> res = foo(test.get_return_buffer());
-    // 打印查询结果
-    for (std::vector<std::string>::iterator it = res.begin(); it != res.end(); it++)
-    {
-        std::cout << *it << std::endl;
-    }
+    // std::vector<std::string> res = foo(test.get_return_buffer());
+    // // 打印查询结果
+    // for (std::vector<std::string>::iterator it = res.begin(); it != res.end(); it++)
+    // {
+    //     std::cout << *it << std::endl;
+    // }
+    std::cout << test.get_return_buffer() << std::endl;
 
     system("pause");
 

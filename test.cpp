@@ -3,30 +3,24 @@
 #include <cstring>
 #include <vector>
 #include <cmath>
+#include "sqlite3.h"
 
 int main()
 {
 
+    sqlite3 *db;
+    sqlite3_open("book_libary.db", &db);
 
-
-
-}
-
-std::vector<std::string> foo(std::string str)
-{
-    std::vector<std::string> res;
-    std::string::iterator it_l = str.begin();
-    std::string::iterator it_r = str.begin();
-
-    while (it_r != str.end())
+    int id = -1;
+    std::string sql = "select id from books where book_name = ";
+    sql += "'test_book1';";
+    char *err_msg;
+    int res = sqlite3_exec(db, sql.c_str(), [](void *data, int colCount, char **colValue, char **colName) -> int
     {
-        if (*it_r == '\n')
-        {
-            res.push_back(std::string(it_l, it_r));
-            it_l = it_r;
-        }
-        it_r++;
-    }
+        *(int*)data = atoi(colValue[0]);
+    return 0; },
+    &id, &err_msg);
 
-    return res;
+    std::cout << id << std::endl;
+
 }

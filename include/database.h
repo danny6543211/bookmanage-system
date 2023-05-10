@@ -41,8 +41,7 @@ public:
 private:
     // 用於新增id
     int user_id_count();
-    int get_user_id(std::string account);
-    int get_book_id(std::string book_name);
+    std::string get_book_id(std::string book_name);
 };
 
 // 對圖書数据库進行操作
@@ -62,6 +61,7 @@ public:
     void delete_book(std::string book_name);
     // 透过字段查询有啥书
     std::string search_book(std::string keyword);
+    std::string get_book_id(std::string book_name);
 private:
     int book_id_count();
 };

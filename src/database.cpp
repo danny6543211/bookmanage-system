@@ -94,8 +94,8 @@ void user_libary::add_rent_book(std::string account, std::string book_name)
     std::string r_date = ctime(&return_date);
     *(c_date.rbegin()) = ' ';
     *(r_date.rbegin()) = ' ';
-    std::string sql_command = "insert into rent_book_table (account, book_name, date, return_date) values";
-    sql_command += " ('" + account + "','" + book_name + "', '" + c_date + "','" + r_date +"');";
+    std::string sql_command = "insert into rent_book_table (account, book_id,  book_name, date, return_date) values";
+    sql_command += " ('" + account + "','" + get_book_id(book_name) + "','" + book_name + "', '" + c_date + "','" + r_date +"');";
     char *err_msg;
     int res = sqlite3_exec(db, sql_command.c_str(), nullptr, nullptr, &err_msg);
     if (res != SQLITE_OK)
@@ -166,8 +166,8 @@ std::string user_libary::get_my_rent_book(std::string account)
     int res = sqlite3_exec(
         db, sql_command.c_str(), [](void *data, int argc, char **argv, char **colName) -> int
         {
-        // 账号
-        // strcat((char *)data, argv[0]);
+        // 编号
+        // strcat((char *)data, this->get_book_id(account).c_str());
         // strcat((char *)data, " ");
         // 书名
         strcat((char *)data, argv[1]);
@@ -179,12 +179,26 @@ std::string user_libary::get_my_rent_book(std::string account)
         strcat((char *)data, argv[3]);
         strcat((char *)data, "\n");
 
+        strcat((char *)data, argv[4]);
+        strcat((char *)data, "\n");
+
         return 0; },
         buffer, &err_msg);
     buffer[strlen(buffer)] = '\0';
     if (res != SQLITE_OK)
         std::cout << err_msg << std::endl;
-    return std::string(buffer);
+    std::string buf = buffer;
+    
+    
+
+
+    return buf;
+}
+
+std::string user_libary::get_book_id(std::string book_name)
+{
+    book_libary bookLibary;
+    return bookLibary.get_book_id(book_name);
 }
 
 book_libary::book_libary() : database("book_libary.db")
@@ -205,8 +219,8 @@ void book_libary::add_book(std::string book_name)
     // 從編號0開始
     // std::cout << book_name << std::endl;
     int new_id_count = book_id_count();
-    std::string sql_command("insert into books (id, book_name, status) values");
-    sql_command += " ('" + std::to_string(new_id_count) + "', '" + book_name + "', 1);";
+    std::string sql_command("insert into books (id, book_name, status, position) values");
+    sql_command += " ('" + std::to_string(new_id_count) + "', '" + book_name + "', 1, '1F');";
     char *err_msg;
     int res = sqlite3_exec(db, sql_command.c_str(), nullptr, nullptr, &err_msg);
     if (res != SQLITE_OK)
@@ -289,12 +303,33 @@ std::string book_libary::search_book(std::string keyword){
     char *err_msg;
     int res = sqlite3_exec(db, sql.c_str(), [](void *data, int colCount, char **colValue, char **colName) -> int
     {
+        strcat((char *)data, colValue[0]);
+        strcat((char *)data, "\n");
+
         strcat((char *)data, colValue[1]);
-        strcat((char *)data, " ");
+        strcat((char *)data, "\n");
+
+        strcat((char *)data, colValue[2]);
+        strcat((char *)data, "\n");
     return 0; },
     buffer, &err_msg);
-    buffer[strlen(buffer)-1] = '\0';
+    buffer[strlen(buffer)] = '\0';
     if (res != SQLITE_OK)
         std::cout << err_msg << std::endl;   
     return std::string(buffer);
+}
+
+std::string book_libary::get_book_id(std::string book_name)
+{
+    int id = -1;
+    std::string sql = "select id from books where book_name = ";
+    sql += "'" + book_name + "';";
+    char *err_msg;
+    int res = sqlite3_exec(db, sql.c_str(), [](void *data, int colCount, char **colValue, char **colName) -> int
+    {
+        *(int*)data = atoi(colValue[0]);
+    return 0; },
+    &id, &err_msg);
+
+    return std::to_string(id);
 }

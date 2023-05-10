@@ -112,6 +112,7 @@ int main()
             server.set_return_buffer("account not exist");
         }
         std::cout << "return value:" << server.get_return_value() << std::endl;
+        std::cout << "return buffer:\n" << server.get_return_buffer() << std::endl;
         server.send_result();
         server.server_close();
 

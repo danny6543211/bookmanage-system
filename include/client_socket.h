@@ -1,7 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 #include "message.h"
-#include <unistd.h>
+// #include <unistd.h>
 #include <WinSock2.h>
 
 class client
