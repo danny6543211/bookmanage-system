@@ -14,6 +14,7 @@ int main()
         // 註冊帳號
         int return_value = -2;
         int type = server.get_type();
+        std::cout << "type:" << type << std::endl;
 
         // 沒有此帳戶查看是否要註冊
         if (type == -1)
@@ -72,8 +73,12 @@ int main()
                     server.set_return_buffer("there is no such book");
                 break;
             case RETURN_BOOOK:
-                server.set_return_value(user.return_book());
-                server.set_return_buffer("return book successful");
+                return_value = user.return_book();
+                server.set_return_value(return_value);
+                if (return_value == 1)
+                    server.set_return_buffer("return book successful");
+                else
+                    server.set_return_buffer("book not exist");
                 break;
             case GET_MY_BOOK:
                 server.set_return_buffer(user.get_my_book());

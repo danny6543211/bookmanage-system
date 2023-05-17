@@ -41,7 +41,7 @@ int main()
     client test;
  
 
-    test.send_message(SEARCH_BOOK, "danny456258", "da123456", "test");
+    test.send_message(LOG_IN, "qweqwe", "qweqwe", "test");
     
     
     // foo 把 string 分段成 vector<string> 
@@ -52,6 +52,7 @@ int main()
     // {
     //     std::cout << *it << std::endl;
     // }
+    std::cout << test.get_return_value() << std::endl;
     std::cout << test.get_return_buffer() << std::endl;
 
     system("pause");

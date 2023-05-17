@@ -51,7 +51,7 @@ int user::rent_book()
 
 int user::return_book()
 {
-    if (bookLibary.check_book(_book_name) && (bookLibary.book_status(_book_name) == 0))
+    if (bookLibary.check_book(_book_name) )
     {
         bookLibary.change_book_status(_book_name, 1);
         userLibary.delete_rent_book(_book_name);

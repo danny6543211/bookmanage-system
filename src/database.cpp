@@ -148,7 +148,7 @@ int user_libary::get_type(std::string account)
     int res = sqlite3_exec(
         db, sql_command.c_str(), [](void *data, int argc, char **argv, char **colName) -> int
         {
-        *(int *)data = std::stoi(std::string(argv[0]).c_str());
+        *(int *)data = std::stoi(std::string(argv[3]).c_str());
         return 0; },
         &type, &err_msg);
     if (res != SQLITE_OK)
