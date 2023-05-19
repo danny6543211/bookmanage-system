@@ -1,37 +1,37 @@
-#include "manager.h"
-#include <string>
-#include <iostream>
+#include <manager.h>
 
-manager::manager() {}
-
-void manager::init(std::string account, std::string password, std::string book_name)
+manager::manager()
 {
-    _account = account;
-    _password = password;
-    _book_name = book_name;
+
 }
 
-int manager::log_in()
+manager::~manager()
 {
-    if (userLibary.check_user(_account))
-    {
-        return userLibary.check_user(_account, _password);
-    }
-    return -1;
+
 }
 
+
+void manager::set(std::string account, std::string password, std::string book_name)
+{
+    __account = account;
+    __password = password;
+    __book = book_name;
+}
+
+// 增加书
 int manager::add_book()
 {
-    if (!bookLibary.check_book(_book_name))
+    if (!__book_library.check_book(__book))
     {
-        bookLibary.add_book(_book_name);
+        __book_library.add_book(__book);
         return 1;
     }
     return 0;
 }
 
+// 删除书
 int manager::delete_book()
 {
-    bookLibary.delete_book(_book_name);
+    __book_library.delete_book(__book);
     return 1;
 }

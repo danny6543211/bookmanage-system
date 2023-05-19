@@ -1,49 +1,48 @@
 #ifndef SERVER_H
 #define SERVER_H
+#include <message.hpp>
+#include <task_handle.hpp>
 #include <winsock2.h>
-#include "user.h"
-#include "manager.h"
-#include "message.h"
-
 
 class server
 {
 public:
     server();
+    
     ~server();
-    // 接收客戶端請求
+
+    // 接受客戶端請求
     void server_accept();
+    
     // 接收客戶端消息
     void receive_message();
-    // 关闭连接
-    void server_close();
-    // 設定返回字符串
-    void set_return_buffer(std::string buffer);
-    // 返回字符串
-    std::string get_return_buffer();
-    // 設定返回值
-    void set_return_value(int res);
-    // 獲取返回值
-    int get_return_value();
+
+    // 處理請求
+    void run_task();
+
+    void log();
+
     // 返回值傳給客戶端
     void send_result();
-    // 取得用戶類型 0 = manager, 1 = user
-    int get_type();
-    // 取得客戶端想要進行的操作
-    int get_action();
-    // 取得客戶端傳送的信息
-    std::string get_account();
-    std::string get_password();
-    std::string get_book_name();
-    
+
+    // 刷新信息
+    void flush_buffer();
+
 private:
-    // 客戶端的信信息
-    message *msg;
+    // 客戶端的信息
+    message *__message;
     // 要返回的結果
-    result *_result;
+    result *__result;
+    // 任務句柄
+    task_handle __task_handle;
+    
     // socket 套接字
-    SOCKET servSock;
-    SOCKET clntSock;
+    SOCKET __server_socket;
+    SOCKET __client_socket;
+
+    std::string get_action_string();
+
 };
+
 
 #endif

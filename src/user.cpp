@@ -1,79 +1,62 @@
-#include "user.h"
-#include <string>
-#include <iostream>
-#include <cstdio>
+#include <user.h>
 
-user::user() {}
-
-void user::init(std::string account, std::string password, std::string book_name)
+user::user()
 {
-    _account = account;
-    _password = password;
-    _book_name = book_name;
 }
 
-int user::log_in()
+user::~user()
 {
-    if (userLibary.check_user(_account))
-    {
-        return userLibary.check_user(_account, _password);
-    }
-    return -1;
 }
 
-int user::sign_up()
+void user::set(std::string account, std::string password, std::string book_name)
 {
-    if (userLibary.check_user(_account)) 
-        return 0;
-    else
-        userLibary.add_user(_account, _password);
-    return 1;
+    __account = account;
+    __password = password;
+    __book = book_name;
 }
 
+//  租书            1(成功) 0(已被借走) -1(没这本书)
 int user::rent_book()
 {
-    if (bookLibary.check_book(_book_name))
+    if (__book_library.check_book(__book))
     {
-        // 有书
-        if (bookLibary.book_status(_book_name) == 1)
+        if (__book_library.book_status(__book) == 1)
         {
-            bookLibary.change_book_status(_book_name, 0);
-            userLibary.add_rent_book(_account, _book_name);
+            __book_library.change_book_status(__book, 0);
+            __user_library.add_rent_book(__account, __book);
             return 1;
         }
+        // 被借走了
         else 
-            // status = 0 書被借走了
             return 0;
     }
-    // 沒這本書
+    // 沒此書
     return -1;
 }
 
+//  还书
 int user::return_book()
 {
-    if (bookLibary.check_book(_book_name) )
+    if (__book_library.check_book(__book) )
     {
-        bookLibary.change_book_status(_book_name, 1);
-        userLibary.delete_rent_book(_book_name);
+        __book_library.change_book_status(__book, 1);
+        __user_library.delete_rent_book(__book);
         return 1;
     }
     // 没这本书
     return 0;
 }
 
-// int user::change_password(std::string account, std::string new_password)
-// {
-//     user_libary::change_password(account, new_password);
-//     return 1;
-// }
 
+//  查看自己借的書
 std::string user::get_my_book()
 {
-    return userLibary.get_my_rent_book(_account);
+    return __user_library.get_my_rent_book(__account);
 }
 
 
+// 查书
 std::string user::search_book(std::string keyword)
 {
-    return bookLibary.search_book(keyword);
+    return __book_library.search_book(keyword);
 }

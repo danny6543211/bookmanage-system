@@ -1,0 +1,4 @@
+C:/Users/Danny/Desktop/book2/build/CMakeFiles/server.dir
+C:/Users/Danny/Desktop/book2/build/CMakeFiles/demo.dir
+C:/Users/Danny/Desktop/book2/build/CMakeFiles/edit_cache.dir
+C:/Users/Danny/Desktop/book2/build/CMakeFiles/rebuild_cache.dir

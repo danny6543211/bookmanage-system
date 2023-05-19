@@ -1,3 +1,4 @@
+del .\log\log.txt 
 rmdir /s/q build
 mkdir build
 cd build

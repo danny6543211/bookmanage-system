@@ -1,4 +1,2 @@
-build
 .vscode
-a.exe
-test.cpp
+.build
