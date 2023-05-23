@@ -57,7 +57,7 @@ void server::log()
     if (return_value.size() == 1)
         return_value = " " + return_value;
 
-    std::string infomation = + "(" + return_value + ") ";
+    std::string infomation = + "" + return_value + "  ";
     infomation += std::string(__message->data.account) + " -> " + get_action_string();
 
     logger.Log(LogLevel::INFO, infomation);
