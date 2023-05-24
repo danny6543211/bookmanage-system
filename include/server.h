@@ -12,18 +12,10 @@ public:
     ~server();
 
     // 接受客戶端請求
-    void server_accept();
-    
-    // 接收客戶端消息
-    void receive_message();
+    void accept_message();
 
     // 處理請求
     void run_task();
-
-    void log();
-
-    // 返回值傳給客戶端
-    void send_result();
 
     // 刷新信息
     void flush_buffer();
@@ -39,8 +31,6 @@ private:
     // socket 套接字
     SOCKET __server_socket;
     SOCKET __client_socket;
-
-    std::string get_action_string();
 
 };
 

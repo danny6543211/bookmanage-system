@@ -6,17 +6,9 @@ int main()
     
     while (1)
     {
-        server.server_accept();
-
-        server.receive_message();
+        server.accept_message();
         
         server.run_task();
-
-        server.log();
-
-        server.send_result();
-
-        server.flush_buffer();
 
     }
 

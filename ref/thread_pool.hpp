@@ -2,11 +2,13 @@
 #define THREAD_POOL_H
 
 #include <iostream>
-#include <mutex>
-#include <condition_variable>
 #include <queue>
 #include <thread>
 #include <functional>
+#include <mutex>
+#include <condition_variable>
+
+#define THREAD_COUNT 2
 
 class thread_pool
 {

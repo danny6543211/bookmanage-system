@@ -7,7 +7,7 @@ project(server)
 link_directories(dll)
 
 
-include_directories(./include ./ref)
+include_directories(./include ./ref C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.35.32215/include)
 # aux_source_directory(./src DIR_SRCS)
 
 # add the executable

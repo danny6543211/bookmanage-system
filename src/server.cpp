@@ -31,84 +31,23 @@ server::~server()
     delete (__result);
 }
 
-void server::server_accept()
+void server::accept_message()
 {
     SOCKADDR client_address;
     int nSize = sizeof(SOCKADDR);
     __client_socket = accept(__server_socket, (SOCKADDR *)&client_address, &nSize);
-}
 
-void server::receive_message()
-{
     recv(__client_socket, (char *)__message, sizeof(*__message), 0);
 }
 
 void server::run_task()
 {
-    __task_handle.ask(*__message);
-    *__result = __task_handle.get_result();
-}
-
-void server::log()
-{
-    Logger logger("./log/log.txt");
-
-    std::string return_value = std::to_string(__result->get_return_value());
-    if (return_value.size() == 1)
-        return_value = " " + return_value;
-
-    std::string infomation = + "" + return_value + "  ";
-    infomation += std::string(__message->data.account) + " -> " + get_action_string();
-
-    logger.Log(LogLevel::INFO, infomation);
-    
-}
-
-void server::send_result()
-{
-    send(__client_socket, (char *)__result, sizeof(*__result), 0);
+    // 交給別人處理
+    __task_handle.add_task(*__message, __client_socket);
 }
 
 void server::flush_buffer()
 {
     __message->flush();
     __result->flush();
-}
-
-std::string server::get_action_string()
-{
-    std::string action_string;
- 
-    switch (__message->action)
-    {
-    case LOG_IN:
-        action_string = "log in";
-        break;
-    case SIGN_UP:
-        action_string = "sign up";
-        break;
-    case RENT_BOOK:
-        action_string = "rent book";
-        break;
-    case RETURN_BOOK:
-        action_string = "return book";
-        break;
-    case ADD_BOOK:
-        action_string = "add book";
-        break;
-    case DELETE_BOOK:
-        action_string = "delete book";
-        break;
-    case GET_MY_BOOK:
-        action_string = "get user's rent book";
-        break;
-    case SEARCH_BOOK:
-        action_string = "search book";
-        break;
-    default:
-        action_string = "illigel action";
-        break;
-    } 
-
-    return action_string;
 }
