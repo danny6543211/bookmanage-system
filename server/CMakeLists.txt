@@ -11,11 +11,11 @@ include_directories(./include ./ref C:/Program Files/Microsoft Visual Studio/202
 # aux_source_directory(./src DIR_SRCS)
 
 # add the executable
-add_executable(server ./src/main.cpp ./src/user_library.cpp ./src/book_library.cpp ./src/user.cpp ./src/manager.cpp ./src/visitor.cpp ./src/server.cpp)
+# add_executable(server ./src/main.cpp ./src/user_library.cpp ./src/book_library.cpp ./src/user.cpp ./src/manager.cpp ./src/visitor.cpp ./src/server.cpp)
 add_executable(demo demo.cpp)
 
 
-target_link_libraries(server wsock32 ws2_32 sqlite3.dll)
+# target_link_libraries(server wsock32 ws2_32 sqlite3.dll)
 target_link_libraries(demo wsock32 ws2_32)
 
 
